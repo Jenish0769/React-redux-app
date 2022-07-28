@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './App.css';
-import { increment ,decrement ,initial } from './redux/actions/action'
+import { increment, decrement, initial } from './redux/actions/action'
 
 function App() {
+
+  const [number, setNumber] = useState(1)
 
   const counter = useSelector((state) => state.counterReducer);
 
@@ -11,10 +14,10 @@ function App() {
     <>
       <div className="App">
         <h1>count:{counter}</h1>
-        
+        <input type='text' value={number} onChange={e => setNumber(e.target.value)} />
         <div className='btn'>
-          <button onClick={() => dispatch(increment())}>Increment</button>
-          <button onClick={() => dispatch(decrement())}>Decrement</button>
+          <button onClick={() => dispatch(increment(number))}>Increment by {number}</button>
+          <button onClick={() => dispatch(decrement(number))}>Decrement by {number}</button>
           <button onClick={() => dispatch(initial())}>Initial</button>
         </div>
       </div>
